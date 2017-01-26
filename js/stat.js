@@ -1,15 +1,48 @@
 'use strict';
 
-var window = {
-  renderStatistics: function (ctx, names, times) {
-    var canvas = document.querySelector('canvas');
-    ctx = canvas.getContext('2d');
+window.renderStatistics = function (ctx, names, times) {
+  var canvas = document.querySelector('canvas');
+  ctx = canvas.getContext('2d');
 
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-    ctx.fillRect(110, 20, 420, 270);
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+  ctx.fillRect(110, 20, 420, 270);
 
-    ctx.fillStyle = 'white';
-    ctx.fillRect(100, 10, 420, 270);
+  ctx.fillStyle = 'white';
+  ctx.strokeRect(100, 10, 420, 270);
+  ctx.fillRect(100, 10, 420, 270);
 
+  ctx.fillStyle = 'black';
+  ctx.font = '16px PT Mono';
+  ctx.textBaseline = 'hanging';
+  ctx.fillText('Ура вы победили!', 120, 30);
+  ctx.fillText('Список результатов:', 120, 50);
+
+  var max = -1;
+
+  for (var i = 0; i < times.length; i++) {
+    if (times[i] > max) {
+      max = times[i];
+    }
+  }
+
+  for (i = 0; i < names.length; i++) {
+    var stepX = 155 + 90 * i;
+    var heightHist = (150 / max) * times[i];
+    var stepHist = 245 - heightHist;
+
+    var colorIndex = parseInt((Math.random() * 5) * 50, 10);
+    var colorIntense = Math.random().toFixed(1);
+
+    if (names[i] === 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    } else {
+      ctx.fillStyle = ['rgba(0, 0, ' + colorIndex + ', ' + colorIntense + ')'];
+    }
+
+    ctx.fillRect(stepX, stepHist, 40, heightHist);
+
+    ctx.fillStyle = 'black';
+    ctx.fillText(names[i], stepX, 255);
+    ctx.fillText(parseInt(times[i], 10), stepX, 225 - heightHist);
   }
 };

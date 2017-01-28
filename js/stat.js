@@ -2,6 +2,10 @@
 
 window.renderStatistics = function (ctx, names, times) {
 
+  function getRandom() {
+    return parseInt(((Math.random() * 5) * 50), 10);
+  }
+
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
   ctx.fillRect(110, 20, 420, 270);
 
@@ -28,15 +32,10 @@ window.renderStatistics = function (ctx, names, times) {
     var heightHist = (150 / max) * times[i];
     var stepHist = 245 - heightHist;
 
-    var colorIndex = parseInt((Math.random() * 5) * 50, 10);
-    var colorIntense = Math.random().toFixed(1);
+    var randomColor = ['rgb(' + getRandom() + ', ' + getRandom() + ', ' + getRandom() + ')'];
+    var colorHist = (names[i] === 'Вы') ? 'red' : randomColor;
 
-    if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    } else {
-      ctx.fillStyle = ['rgba(0, 0, ' + colorIndex + ', ' + colorIntense + ')'];
-    }
-
+    ctx.fillStyle = colorHist;
     ctx.fillRect(stepX, stepHist, 40, heightHist);
 
     ctx.fillStyle = 'black';

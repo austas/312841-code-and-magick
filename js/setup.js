@@ -37,6 +37,10 @@ var getColorCoatIndex = function () {
 
 wizardCoat.addEventListener('click', getColorCoatIndex);
 
+var nameField = setup.querySelector('.setup-user-name');
+nameField.required = true;
+nameField.maxLength = '50';
+
 var wizardEyes = wizard.querySelector('#wizard-eyes');
 var wizardEyesColors = [
   'black',

@@ -50,3 +50,17 @@ wizardEyes.addEventListener('click', function () {
   var eyesColor = wizardEyesColors[Math.floor(Math.random() * wizardEyesColors.length)];
   wizardEyes.style.fill = eyesColor;
 });
+
+var fireball = document.querySelector('.setup-fireball-wrap');
+var fireballList = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848'
+];
+
+fireball.addEventListener('click', function () {
+  var fireballColor = fireballList[Math.floor(Math.random() * wizardEyesColors.length)];
+  fireball.style.background = fireballColor;
+});

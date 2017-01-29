@@ -23,6 +23,15 @@ var wizardCoatColors = [
   'rgb(0, 0, 0)'
 ];
 
-wizard.addEventListener('click', function () {
-  wizardCoat.style.fill = wizardCoatColors[Math.floor(Math.random() * wizardCoatColors.length)];
-});
+var colorCoatIndex = 0;
+var getColorCoatIndex = function () {
+  if (colorCoatIndex < wizardCoatColors.length) {
+    wizardCoat.style.fill = wizardCoatColors[colorCoatIndex];
+    colorCoatIndex++;
+  } else {
+    colorCoatIndex = 0;
+    getColorCoatIndex();
+  }
+};
+
+wizard.addEventListener('click', getColorCoatIndex);

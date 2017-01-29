@@ -12,8 +12,9 @@ setupClose.addEventListener('click', function () {
   setup.classList.add('invisible');
 });
 
-var wizard = setup.querySelector('#wizard');
+var wizard = document.querySelector('#wizard');
 var wizardCoat = wizard.querySelector('#wizard-coat');
+
 var wizardCoatColors = [
   'rgb(101, 137, 164)',
   'rgb(241, 43, 107)',
@@ -23,7 +24,7 @@ var wizardCoatColors = [
   'rgb(0, 0, 0)'
 ];
 
-var colorCoatIndex = 0;
+var colorCoatIndex = 1;
 var getColorCoatIndex = function () {
   if (colorCoatIndex < wizardCoatColors.length) {
     wizardCoat.style.fill = wizardCoatColors[colorCoatIndex];
@@ -34,4 +35,18 @@ var getColorCoatIndex = function () {
   }
 };
 
-wizard.addEventListener('click', getColorCoatIndex);
+wizardCoat.addEventListener('click', getColorCoatIndex);
+
+var wizardEyes = wizard.querySelector('#wizard-eyes');
+var wizardEyesColors = [
+  'black',
+  'red',
+  'blue',
+  'yellow',
+  'green'
+];
+
+wizardEyes.addEventListener('click', function () {
+  var eyesColor = wizardEyesColors[Math.floor(Math.random() * wizardEyesColors.length)];
+  wizardEyes.style.fill = eyesColor;
+});

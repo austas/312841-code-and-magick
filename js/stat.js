@@ -2,9 +2,20 @@
 
 window.renderStatistics = function (ctx, names, times) {
 
-// Функция генерирует случайное число. Будем использовать ее для генерации случайного цвета
-  function getRandom() {
-    return parseInt(((Math.random() * 5) * 50), 10);
+// Функция для выбора цвета в зависимости от имени игрока
+  function getColor(name) {
+    var randomColor = ['rgba(0, 0, 255, ' + Math.random().toFixed(1) + ')'];
+    return (names[i] === 'Вы') ? 'rgba(255, 0, 0, 1)' : randomColor;
+  }
+
+// Функция получения высоты диаграммы
+  function getHistHeight(time) {
+    return (150 / max) * times[i];
+  }
+
+// Функция получения шага по оси х
+  function getStepX(i) {
+    return 155 + 90 * i;
   }
 
 // Функция для рисования прямоугольников по заданным параметрам
@@ -21,6 +32,21 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillText(message, x1, y1);
   }
 
+// Функция отрисовки статистики
+  function drawStat(name, time) {
+    drawRect(getStepX(i), 245 - getHistHeight(times[i]), 40, getHistHeight(times[i]), getColor(names[i]));
+    drawText(names[i], getStepX(i), 255);
+    drawText(parseInt(times[i], 10), getStepX(i), 225 - getHistHeight(times[i]));
+  }
+
+// Поиск макс. значения для определения высоты гистограммы;
+  var max = -1;
+  for (var i = 0; i < times.length; i++) {
+    if (times[i] > max) {
+      max = times[i];
+    }
+  }
+
 // Рисуем подложку + тень + текст
   drawRect(110, 20, 420, 270, 'rgba(0, 0, 0, 0.7)');
   drawRect(99, 9, 422, 272); // этот прямоугольник для того, чтобы создать границу, используя уже заданную функцию
@@ -29,25 +55,8 @@ window.renderStatistics = function (ctx, names, times) {
   drawText('Ура вы победили!', 120, 30);
   drawText('Список результатов:', 120, 50);
 
-// Ищем максимальное время среди игроков, далее будем использовать его для подсчета макс. высоты гистограммы
-  var max = -1;
-  for (var i = 0; i < times.length; i++) {
-    if (times[i] > max) {
-      max = times[i];
-    }
-  }
-
-// Отрисовываем гистограммы в соот. с временем прохождения игроками игры + выводим эти значения
+  // Рисуем статистику игроков
   for (i = 0; i < names.length; i++) {
-    var stepX = 155 + 90 * i;
-    var heightHist = (150 / max) * times[i];
-
-    var randomColor = ['rgba(0, 0, ' + getRandom() + ', ' + Math.random().toFixed(1) + ')'];
-    var color = (names[i] === 'Вы') ? 'rgba(255, 0, 0, 1)' : randomColor;
-
-    drawRect(stepX, 245 - heightHist, 40, heightHist, color);
-    drawText(names[i], stepX, 255);
-    drawText(parseInt(times[i], 10), stepX, 225 - heightHist);
-
+    drawStat(i);
   }
 };

@@ -42,8 +42,8 @@ window.renderStatistics = function (ctx, names, times) {
     var stepX = 155 + 90 * i;
     var heightHist = (150 / max) * times[i];
 
-    var randomColor = ['rgb(0, ' + getRandom() + ', ' + getRandom() + ')'];
-    var color = (names[i] === 'Вы') ? 'red' : randomColor;
+    var randomColor = ['rgba(0, 0, ' + getRandom() + ', ' + Math.random().toFixed(1) + ')'];
+    var color = (names[i] === 'Вы') ? 'rgba(255, 0, 0, 1)' : randomColor;
 
     drawRect(stepX, 245 - heightHist, 40, heightHist, color);
     drawText(names[i], stepX, 255);

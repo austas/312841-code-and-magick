@@ -1,16 +1,19 @@
 'use strict';
 
+var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = document.querySelector('.setup-close');
-var setup = document.querySelector('.setup');
 
-setupOpen.addEventListener('click', function () {
-  setup.classList.remove('invisible');
-});
+function letSetupOpenClose() {
+  if (setup.classList.contains('invisible')) {
+    setup.classList.remove('invisible');
+  } else {
+    setup.classList.add('invisible');
+  }
+}
 
-setupClose.addEventListener('click', function () {
-  setup.classList.add('invisible');
-});
+setupOpen.addEventListener('click', letSetupOpenClose);
+setupClose.addEventListener('click', letSetupOpenClose);
 
 var wizard = document.querySelector('#wizard');
 var wizardCoat = wizard.querySelector('#wizard-coat');

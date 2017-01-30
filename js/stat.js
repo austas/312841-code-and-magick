@@ -3,14 +3,14 @@
 window.renderStatistics = function (ctx, names, times) {
 
 // Функция для выбора цвета в зависимости от имени игрока
-  function getColor(name) {
+  function getColor() {
     var randomColor = ['rgba(0, 0, 255, ' + Math.random().toFixed(1) + ')'];
     return (names[i] === 'Вы') ? 'rgba(255, 0, 0, 1)' : randomColor;
   }
 
 // Функция получения высоты диаграммы
-  function getHistHeight(time) {
-    return (150 / max) * times[i];
+  function getHistHeight() {
+    return (150 / getMax()) * times[i];
   }
 
 // Функция получения шага по оси х
@@ -33,18 +33,23 @@ window.renderStatistics = function (ctx, names, times) {
   }
 
 // Функция отрисовки статистики
-  function drawStat(name, time) {
-    drawRect(getStepX(i), 245 - getHistHeight(times[i]), 40, getHistHeight(times[i]), getColor(names[i]));
-    drawText(names[i], getStepX(i), 255);
-    drawText(parseInt(times[i], 10), getStepX(i), 225 - getHistHeight(times[i]));
+  function drawStat(i) {
+    var histHeight = getHistHeight(i);
+    var stepX = getStepX(i);
+    drawRect(stepX, 245 - histHeight, 40, histHeight, getColor(names[i]));
+    drawText(names[i], stepX, 255);
+    drawText(parseInt(times[i], 10), stepX, 225 - histHeight);
   }
 
 // Поиск макс. значения для определения высоты гистограммы;
   var max = -1;
-  for (var i = 0; i < times.length; i++) {
-    if (times[i] > max) {
-      max = times[i];
+  function getMax() {
+    for (var i = 0; i < times.length; i++) {
+      if (times[i] > max) {
+        max = times[i];
+      }
     }
+    return max;
   }
 
 // Рисуем подложку + тень + текст
@@ -56,7 +61,7 @@ window.renderStatistics = function (ctx, names, times) {
   drawText('Список результатов:', 120, 50);
 
   // Рисуем статистику игроков
-  for (i = 0; i < names.length; i++) {
+  for (var i = 0; i < names.length; i++) {
     drawStat(i);
   }
 };

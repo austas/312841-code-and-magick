@@ -31,17 +31,17 @@ var wizardCoatColors = [
 ];
 
 var colorCoatIndex = 1;
-function getColorCoatIndex() {
+function setCoatColor() {
   if (colorCoatIndex < wizardCoatColors.length) {
     wizardCoat.style.fill = wizardCoatColors[colorCoatIndex];
     colorCoatIndex++;
   } else {
     colorCoatIndex = 0;
-    getColorCoatIndex();
+    setCoatColor();
   }
 }
 
-wizardCoat.addEventListener('click', getColorCoatIndex);
+wizardCoat.addEventListener('click', setCoatColor);
 
 var wizardEyes = wizard.querySelector('#wizard-eyes');
 var wizardEyesColors = [

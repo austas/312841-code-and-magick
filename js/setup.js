@@ -6,7 +6,7 @@ nameField.required = true;
 nameField.maxLength = '50';
 
 var setupOpen = document.querySelector('.setup-open');
-var setupClose = document.querySelector('.setup-close');
+var setupClose = setup.querySelector('.setup-close');
 
 function letSetupOpenClose() {
   if (setup.classList.contains('invisible')) {
@@ -19,7 +19,7 @@ function letSetupOpenClose() {
 setupOpen.addEventListener('click', letSetupOpenClose);
 setupClose.addEventListener('click', letSetupOpenClose);
 
-var wizard = document.querySelector('#wizard');
+var wizard = setup.querySelector('#wizard');
 var wizardCoat = wizard.querySelector('#wizard-coat');
 var wizardCoatColors = [
   'rgb(101, 137, 164)',
@@ -59,7 +59,7 @@ function letsChangeEyesColor() {
 
 wizardEyes.addEventListener('click', letsChangeEyesColor);
 
-var fireball = document.querySelector('.setup-fireball-wrap');
+var fireball = setup.querySelector('.setup-fireball-wrap');
 var fireballList = [
   '#ee4830',
   '#30a8ee',

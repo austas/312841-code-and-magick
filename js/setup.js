@@ -61,7 +61,7 @@ function setCoatColor() {
 }
 
 function letsChangeColor() {
-  if (this === wizardEyes) {
+  if (this == wizardEyes) {
     wizardEyes.style.fill = wizardEyesColors[getRandom(wizardEyesColors)];
   } else {
     fireball.style.background = fireballList[getRandom(fireballList)];

@@ -44,6 +44,8 @@ function setCoatColor() {
 wizardCoat.addEventListener('click', setCoatColor);
 
 var wizardEyes = wizard.querySelector('#wizard-eyes');
+var fireball = setup.querySelector('.setup-fireball-wrap');
+
 var wizardEyesColors = [
   'black',
   'red',
@@ -52,14 +54,6 @@ var wizardEyesColors = [
   'green'
 ];
 
-function letsChangeEyesColor() {
-  var eyesColor = wizardEyesColors[Math.floor(Math.random() * wizardEyesColors.length)];
-  wizardEyes.style.fill = eyesColor;
-}
-
-wizardEyes.addEventListener('click', letsChangeEyesColor);
-
-var fireball = setup.querySelector('.setup-fireball-wrap');
 var fireballList = [
   '#ee4830',
   '#30a8ee',
@@ -68,9 +62,17 @@ var fireballList = [
   '#e6e848'
 ];
 
-function letsChangeFireball() {
-  var fireballColor = fireballList[Math.floor(Math.random() * fireballList.length)];
-  fireball.style.background = fireballColor;
+function getRandom(whatElement) {
+  return Math.floor(Math.random() * whatElement.length);
 }
 
-fireball.addEventListener('click', letsChangeFireball);
+function letsChangeColor() {
+  if (this === wizardEyes) {
+    wizardEyes.style.fill = wizardEyesColors[getRandom(wizardEyesColors)];
+  } else {
+    fireball.style.background = fireballList[getRandom(fireballList)];
+  }
+}
+
+wizardEyes.addEventListener('click', letsChangeColor);
+fireball.addEventListener('click', letsChangeColor);

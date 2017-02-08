@@ -80,16 +80,19 @@ function setupSubmitHandler(evt) {
   evt.preventDefault();
 }
 
-var colorCoatIndex = 1;
-function coatColorHandler() {
-  if (colorCoatIndex < wizardCoatColors.length) {
-    wizardCoat.style.fill = wizardCoatColors[colorCoatIndex];
-    colorCoatIndex++;
-  } else {
-    colorCoatIndex = 0;
-    coatColorHandler();
+var getRandomElement = function (arrayOfColors) {
+  var randomColorIndex = Math.floor(Math.random() * arrayOfColors.length);
+  return arrayOfColors[randomColorIndex];
+};
+
+var getRandomElementExcept = function (arrayOfColors, currentColor) {
+  // var currentColor = arrayOfColors[0];
+  var newColor = null;
+  while (!newColor || newColor === currentColor) {
+    newColor = getRandomElement(arrayOfColors);
   }
-}
+  return newColor;
+};
 
 setupOpen.addEventListener('click', showSetup);
 setupOpenIcon.addEventListener('keydown', function (evt) {
@@ -112,10 +115,13 @@ setupSubmit.addEventListener('keydown', function (evt) {
   }
 });
 
-wizardCoat.addEventListener('click', coatColorHandler);
+wizardCoat.addEventListener('click', function () {
+  var currentColor = wizardCoat.style.fill;
+  wizardCoat.style.fill = getRandomElementExcept(wizardCoatColors, currentColor);
+});
 
 wizardEyes.addEventListener('click', function () {
-  wizardEyes.style.fill = wizardEyesColors[getColor(wizardEyesColors)];
+  wizardEyes.style.fill = getRandomElementExcept(wizardEyesColors);
 });
 
 fireball.addEventListener('click', function () {

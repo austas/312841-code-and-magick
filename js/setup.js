@@ -75,14 +75,6 @@ function setupSubmitHandler(evt) {
   evt.preventDefault();
 }
 
-var colorizeElement = function (element, colors, property) {
-  var currentColorOfElement = element.style[property];
-
-  element.addEventListener('click', function () {
-    element.style[property] = window.utils.getRandomElementExcept(colors, currentColorOfElement);
-  });
-};
-
 setupOpen.addEventListener('click', showSetup);
 setupOpenIcon.addEventListener('keydown', function (evt) {
   if (isActivateEvent(evt)) {
@@ -104,6 +96,6 @@ setupSubmit.addEventListener('keydown', function (evt) {
   }
 });
 
-colorizeElement(wizardCoat, wizardCoatColors, 'fill');
-colorizeElement(wizardEyes, wizardEyesColors, 'fill');
-colorizeElement(fireball, fireballList, 'background');
+window.colorizeElement(wizardCoat, wizardCoatColors, 'fill');
+window.colorizeElement(wizardEyes, wizardEyesColors, 'fill');
+window.colorizeElement(fireball, fireballList, 'background');

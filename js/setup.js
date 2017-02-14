@@ -98,4 +98,4 @@ setupSubmit.addEventListener('keydown', function (evt) {
 
 window.colorizeElement(wizardCoat, wizardCoatColors, 'fill');
 window.colorizeElement(wizardEyes, wizardEyesColors, 'fill');
-window.colorizeElement(fireball, fireballList, 'background');
+window.colorizeElement(fireball, fireballList, 'backgroundColor');

@@ -64,11 +64,6 @@ var hideSetup = function () {
   document.removeEventListener('keydown', setupKeydownHandler);
 };
 
-function getColor(whichColorArray) {
-  var whatColor = Math.floor(Math.random() * whichColorArray.length);
-  return whatColor;
-}
-
 function setupCloseHandler() {
   setupClose.setAttribute('aria-pressed', 'true');
   hideSetup();
@@ -78,17 +73,6 @@ function setupSubmitHandler(evt) {
   hideSetup();
   setupSubmit.setAttribute('aria-pressed', 'true');
   evt.preventDefault();
-}
-
-var colorCoatIndex = 1;
-function coatColorHandler() {
-  if (colorCoatIndex < wizardCoatColors.length) {
-    wizardCoat.style.fill = wizardCoatColors[colorCoatIndex];
-    colorCoatIndex++;
-  } else {
-    colorCoatIndex = 0;
-    coatColorHandler();
-  }
 }
 
 setupOpen.addEventListener('click', showSetup);
@@ -112,12 +96,6 @@ setupSubmit.addEventListener('keydown', function (evt) {
   }
 });
 
-wizardCoat.addEventListener('click', coatColorHandler);
-
-wizardEyes.addEventListener('click', function () {
-  wizardEyes.style.fill = wizardEyesColors[getColor(wizardEyesColors)];
-});
-
-fireball.addEventListener('click', function () {
-  fireball.style.background = fireballList[getColor(fireballList)];
-});
+window.colorizeElement(wizardCoat, wizardCoatColors, 'fill');
+window.colorizeElement(wizardEyes, wizardEyesColors, 'fill');
+window.colorizeElement(fireball, fireballList, 'backgroundColor');

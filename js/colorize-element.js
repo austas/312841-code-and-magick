@@ -13,7 +13,7 @@ window.colorizeElement = (function () {
     element.addEventListener('keydown', function (evt) {
       var computedStyle = getComputedStyle(element);
       var currentColorOfElement = computedStyle[property];
-      if (window.isActivateEvent(evt)) {
+      if (window.utils.isActivateEvent(evt)) {
         element.style[property] = window.utils.getRandomElementExcept(colors, currentColorOfElement);
       }
     });

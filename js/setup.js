@@ -1,16 +1,79 @@
 'use strict';
 
-(function () {
-
+window.enableSetup = (function () {
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
-  var wizard = setup.querySelector('#wizard');
-  var fireball = setup.querySelector('.setup-fireball-wrap');
   var setupClose = setup.querySelector('.setup-close');
+  // var setupOpenIcon = setupOpen.querySelector('.setup-open-icon');
+  var setupSubmit = document.querySelector('.setup-submit');
+  var onSetupClose = null;
+
+  var setupKeydownHandler = function (evt) {
+    if (window.utils.isEscEvent(evt)) {
+      hideSetup();
+    }
+  };
+
+  var showSetup = function () {
+    // setupOpenIcon.setAttribute('aria-pressed', 'true');
+    setup.classList.remove('invisible');
+    // setup.setAttribute('aria-hidden', 'false');
+    // setupClose.setAttribute('aria-pressed', 'false');
+    // setupSubmit.setAttribute('aria-pressed', 'false');
+    document.addEventListener('keydown', setupKeydownHandler);
+  };
+
+  var hideSetup = function () {
+    // setupOpenIcon.setAttribute('aria-pressed', 'false');
+    setup.classList.add('invisible');
+    // setup.setAttribute('aria-hidden', 'true');
+    document.removeEventListener('keydown', setupKeydownHandler);
+
+    if (typeof onSetupClose === 'function') {
+      onSetupClose();
+    }
+  };
+
+  function setupCloseHandler() {
+    // setupClose.setAttribute('aria-pressed', 'true');
+    hideSetup();
+  }
+
+  function setupSubmitHandler(evt) {
+    hideSetup();
+    // setupSubmit.setAttribute('aria-pressed', 'true');
+    evt.preventDefault();
+  }
+
+  setupOpen.addEventListener('click', showSetup);
+  setupClose.addEventListener('click', setupCloseHandler);
+
+  setupSubmit.addEventListener('click', setupSubmitHandler);
+  setupSubmit.addEventListener('keydown', function (evt) {
+    if (window.utils.isActivateEvent(evt)) {
+      setupSubmitHandler(evt);
+    }
+  });
+
+  return function (cb) {
+    showSetup();
+    setupClose.addEventListener('keydown', function (evt) {
+      if (window.utils.isActivateEvent(evt)) {
+        setupCloseHandler();
+      }
+    });
+
+    onSetupClose = cb;
+  };
+
+})();
+
+(function () {
+
+  var wizard = document.querySelector('#wizard');
+  var fireball = document.querySelector('.setup-fireball-wrap');
   var wizardEyes = wizard.querySelector('#wizard-eyes');
   var wizardCoat = wizard.querySelector('#wizard-coat');
-  var setupOpenIcon = setupOpen.querySelector('.setup-open-icon');
-  var setupSubmit = document.querySelector('.setup-submit');
 
   var wizardCoatColors = [
     'rgb(101, 137, 164)',
@@ -36,60 +99,6 @@
     '#e848d5',
     '#e6e848'
   ];
-
-  var setupKeydownHandler = function (evt) {
-    if (window.utils.isEscEvent(evt)) {
-      hideSetup();
-    }
-  };
-
-  var showSetup = function () {
-    setupOpenIcon.setAttribute('aria-pressed', 'true');
-    setup.classList.remove('invisible');
-    setup.setAttribute('aria-hidden', 'false');
-    setupClose.setAttribute('aria-pressed', 'false');
-    setupSubmit.setAttribute('aria-pressed', 'false');
-    document.addEventListener('keydown', setupKeydownHandler);
-  };
-
-  var hideSetup = function () {
-    setupOpenIcon.setAttribute('aria-pressed', 'false');
-    setup.classList.add('invisible');
-    setup.setAttribute('aria-hidden', 'true');
-    document.removeEventListener('keydown', setupKeydownHandler);
-  };
-
-  function setupCloseHandler() {
-    setupClose.setAttribute('aria-pressed', 'true');
-    hideSetup();
-  }
-
-  function setupSubmitHandler(evt) {
-    hideSetup();
-    setupSubmit.setAttribute('aria-pressed', 'true');
-    evt.preventDefault();
-  }
-
-  setupOpen.addEventListener('click', showSetup);
-  setupOpenIcon.addEventListener('keydown', function (evt) {
-    if (window.utils.isActivateEvent(evt)) {
-      showSetup();
-    }
-  });
-
-  setupClose.addEventListener('click', setupCloseHandler);
-  setupClose.addEventListener('keydown', function (evt) {
-    if (window.utils.isActivateEvent(evt)) {
-      setupCloseHandler();
-    }
-  });
-
-  setupSubmit.addEventListener('click', setupSubmitHandler);
-  setupSubmit.addEventListener('keydown', function (evt) {
-    if (window.utils.isActivateEvent(evt)) {
-      setupSubmitHandler(evt);
-    }
-  });
 
   window.colorizeElement(wizardCoat, wizardCoatColors, 'fill');
   window.colorizeElement(wizardEyes, wizardEyesColors, 'fill');

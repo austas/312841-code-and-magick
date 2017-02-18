@@ -35,15 +35,8 @@ var fireballList = [
   '#e6e848'
 ];
 
-var ENTER_KEY_CODE = 13;
-var ESCAPE_KEY_CODE = 27;
-
-var isActivateEvent = function (evt) {
-  return evt.keyCode && evt.keyCode === ENTER_KEY_CODE;
-};
-
 var setupKeydownHandler = function (evt) {
-  if (evt.keyCode === ESCAPE_KEY_CODE) {
+  if (window.utils.isEscEvent(evt)) {
     hideSetup();
   }
 };
@@ -77,21 +70,21 @@ function setupSubmitHandler(evt) {
 
 setupOpen.addEventListener('click', showSetup);
 setupOpenIcon.addEventListener('keydown', function (evt) {
-  if (isActivateEvent(evt)) {
+  if (window.utils.isActivateEvent(evt)) {
     showSetup();
   }
 });
 
 setupClose.addEventListener('click', setupCloseHandler);
 setupClose.addEventListener('keydown', function (evt) {
-  if (isActivateEvent(evt)) {
+  if (window.utils.isActivateEvent(evt)) {
     setupCloseHandler();
   }
 });
 
 setupSubmit.addEventListener('click', setupSubmitHandler);
 setupSubmit.addEventListener('keydown', function (evt) {
-  if (isActivateEvent(evt)) {
+  if (window.utils.isActivateEvent(evt)) {
     setupSubmitHandler(evt);
   }
 });

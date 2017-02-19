@@ -102,6 +102,6 @@ window.enableSetup = (function () {
 
   window.colorizeElement(wizardCoat, wizardCoatColors, 'fill');
   window.colorizeElement(wizardEyes, wizardEyesColors, 'fill');
-  window.colorizeElement(fireball, fireballList, 'backgroundColor');
+  window.colorizeElement(fireball, fireballList, 'background');
 
 })();

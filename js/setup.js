@@ -67,7 +67,7 @@ window.enableSetup = (function () {
 
 })();
 
-window.changeColor = (function () {
+(function () {
 
   var wizard = document.querySelector('#wizard');
   var fireball = document.querySelector('.setup-fireball-wrap');
@@ -107,8 +107,8 @@ window.changeColor = (function () {
     element.style.backgroundColor = color;
   };
 
-  window.colorizeElement(wizardCoat, wizardCoatColors, 'fill', fillElement);
-  window.colorizeElement(wizardEyes, wizardEyesColors, 'fill', fillElement);
-  window.colorizeElement(fireball, fireballList, 'backgroundColor', changeElementBackground);
+  window.colorizeElement(wizardCoat, wizardCoatColors, wizardCoat.style.fill, fillElement);
+  window.colorizeElement(wizardEyes, wizardEyesColors, wizardEyes.style.fill, fillElement);
+  window.colorizeElement(fireball, fireballList, fireball.style.backgroundColor, changeElementBackground);
 
 })();

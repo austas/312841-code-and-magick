@@ -2,12 +2,10 @@
 
 window.colorizeElement = (function () {
 
-  return function (element, colors, property, callback) {
+  return function (element, colors, currentColorOfElement, callback) {
 
     var changeColor = function () {
-      var currentColorOfElement = element.style[property];
-      var newColor = window.utils.getRandomElementExcept(colors, currentColorOfElement);
-      callback(element, newColor);
+      callback(element, window.utils.getRandomElementExcept(colors, currentColorOfElement));
     };
 
     element.addEventListener('click', changeColor);

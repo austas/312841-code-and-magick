@@ -67,7 +67,7 @@ window.enableSetup = (function () {
 
 })();
 
-(function () {
+window.changeColor = (function () {
 
   var wizard = document.querySelector('#wizard');
   var fireball = document.querySelector('.setup-fireball-wrap');
@@ -99,8 +99,16 @@ window.enableSetup = (function () {
     '#e6e848'
   ];
 
-  window.colorizeElement(wizardCoat, wizardCoatColors, 'fill');
-  window.colorizeElement(wizardEyes, wizardEyesColors, 'fill');
-  window.colorizeElement(fireball, fireballList, 'background');
+  var fillElement = function (element, color) {
+    element.style.fill = color;
+  };
+
+  var changeElementBackground = function (element, color) {
+    element.style.backgroundColor = color;
+  };
+
+  window.colorizeElement(wizardCoat, wizardCoatColors, 'fill', fillElement);
+  window.colorizeElement(wizardEyes, wizardEyesColors, 'fill', fillElement);
+  window.colorizeElement(fireball, fireballList, 'backgroundColor', changeElementBackground);
 
 })();

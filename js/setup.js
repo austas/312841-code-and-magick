@@ -4,7 +4,6 @@ window.enableSetup = (function () {
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
-  // var setupOpenIcon = setupOpen.querySelector('.setup-open-icon');
   var setupSubmit = document.querySelector('.setup-submit');
   var onSetupClose = null;
 
@@ -15,18 +14,18 @@ window.enableSetup = (function () {
   };
 
   var showSetup = function () {
-    // setupOpenIcon.setAttribute('aria-pressed', 'true');
+    setupOpen.querySelector('.setup-open-icon').setAttribute('aria-pressed', 'true');
     setup.classList.remove('invisible');
-    // setup.setAttribute('aria-hidden', 'false');
-    // setupClose.setAttribute('aria-pressed', 'false');
-    // setupSubmit.setAttribute('aria-pressed', 'false');
+    setup.setAttribute('aria-hidden', 'false');
+    setupClose.setAttribute('aria-pressed', 'false');
+    setupSubmit.setAttribute('aria-pressed', 'false');
     document.addEventListener('keydown', setupKeydownHandler);
   };
 
   var hideSetup = function () {
-    // setupOpenIcon.setAttribute('aria-pressed', 'false');
+    setupOpen.querySelector('.setup-open-icon').setAttribute('aria-pressed', 'false');
     setup.classList.add('invisible');
-    // setup.setAttribute('aria-hidden', 'true');
+    setup.setAttribute('aria-hidden', 'true');
     document.removeEventListener('keydown', setupKeydownHandler);
 
     if (typeof onSetupClose === 'function') {
@@ -35,13 +34,13 @@ window.enableSetup = (function () {
   };
 
   function setupCloseHandler() {
-    // setupClose.setAttribute('aria-pressed', 'true');
+    setupClose.setAttribute('aria-pressed', 'true');
     hideSetup();
   }
 
   function setupSubmitHandler(evt) {
     hideSetup();
-    // setupSubmit.setAttribute('aria-pressed', 'true');
+    setupSubmit.setAttribute('aria-pressed', 'true');
     evt.preventDefault();
   }
 

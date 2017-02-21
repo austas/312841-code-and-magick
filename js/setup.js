@@ -107,8 +107,8 @@ window.enableSetup = (function () {
     element.style.backgroundColor = color;
   };
 
-  window.colorizeElement(wizardCoat, wizardCoatColors, wizardCoat.style.fill, fillElement);
-  window.colorizeElement(wizardEyes, wizardEyesColors, wizardEyes.style.fill, fillElement);
-  window.colorizeElement(fireball, fireballList, fireball.style.backgroundColor, changeElementBackground);
+  window.colorizeElement(wizardCoat, wizardCoatColors, fillElement);
+  window.colorizeElement(wizardEyes, wizardEyesColors, fillElement);
+  window.colorizeElement(fireball, fireballList, changeElementBackground);
 
 })();

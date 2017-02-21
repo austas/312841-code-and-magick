@@ -2,10 +2,23 @@
 
 window.colorizeElement = (function () {
 
-  return function (element, colors, currentColorOfElement, callback) {
+  return function (element, colors, callback) {
 
     var changeColor = function () {
-      callback(element, window.utils.getRandomElementExcept(colors, currentColorOfElement));
+      var currentColorOfElement = null;
+
+      switch (element) {
+        case 'wizardCoat':
+        case 'wizardEyes':
+          currentColorOfElement = element.style.fill;
+          break;
+        case 'fireball':
+          currentColorOfElement = element.style.backgroundColor;
+          break;
+      }
+
+      var newColor = window.utils.getRandomElementExcept(colors, currentColorOfElement);
+      callback(element, newColor);
     };
 
     element.addEventListener('click', changeColor);

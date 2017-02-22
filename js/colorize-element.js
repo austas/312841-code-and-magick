@@ -4,15 +4,16 @@ window.colorizeElement = (function () {
 
   return function (element, colors, callback) {
 
+    var elementProperty = window.utils.getPropertyForElement(element);
+    var currentColor = element.style[elementProperty];
+
     element.addEventListener('click', function () {
-      var newColor = window.utils.getRandomElementExcept(colors, window.getCurrentColor(element));
-      callback(element, newColor);
+      callback(element, window.utils.getRandomElementExcept(colors, currentColor));
     });
 
     element.addEventListener('keydown', function (evt) {
       if (window.utils.isActivateEvent(evt)) {
-        var newColor = window.utils.getRandomElementExcept(colors, window.getCurrentColor(element));
-        callback(element, newColor);
+        callback(element, window.utils.getRandomElementExcept(colors, currentColor));
       }
     });
   };

@@ -18,6 +18,23 @@ window.utils = (function () {
       return newElement;
     },
 
+    getPropertyForElement: function () {
+      return function (element) {
+        var elementProperty = null;
+
+        switch (element) {
+          case 'wizardCoat':
+          case 'wizardEyes':
+            elementProperty = 'fill';
+            break;
+          case 'fireball':
+            elementProperty = 'backgroundColor';
+            break;
+        }
+        return elementProperty;
+      };
+    },
+
     isActivateEvent: function (evt) {
       return evt.keyCode && evt.keyCode === ENTER_KEY_CODE;
     },

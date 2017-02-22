@@ -67,6 +67,24 @@ window.enableSetup = (function () {
 
 })();
 
+window.getCurrentColor = (function () {
+  return function (element) {
+    var currentColorOfElement = null;
+
+    switch (element) {
+      case 'wizardCoat':
+      case 'wizardEyes':
+        currentColorOfElement = element.style.fill;
+        break;
+      case 'fireball':
+        currentColorOfElement = element.style.backgroundColor;
+        break;
+    }
+    return currentColorOfElement;
+  };
+
+})();
+
 (function () {
 
   var wizard = document.querySelector('#wizard');
